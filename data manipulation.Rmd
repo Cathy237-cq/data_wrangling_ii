@@ -3,8 +3,81 @@ title: "Data Manipulation"
 output: github_document
 ---
 ```{r setup, echo = FALSE, message=FALSE}
-library(tidyverse)
+ library(tidyverse)
 ```
 
 This document will show how to *manipulating* data.
 
+Import the two datasets that we're going to manipulate.
+
+```{r}
+ litters_df = 
+   read_csv("data/FAS_litters.csv", na = c ("NA", "", "."))
+
+ litters_df = janitor::clean_names(litters_df)
+ 
+ pups_df = 
+   read_csv("data/FAS_pups.csv", na = c ("NA", "", "."))
+ 
+ pups_df = janitor::clean_names(pups_df)
+```
+
+tips: 
+
+1. having space in variable is hard to read for R, it'll consider it as second variable.so, we use "janitor" function to clean the variable name, make it lower case.
+
+2. using "view()" in rmd cause truble, so, it's better type "view()"in the console, to just read the whole dataset.
+
+
+## 'select'
+
+Use 'select()' to selsect variables
+
+```{r}
+ select(litters_df, group, litter_number, gd0_weight)
+```
+
+":" means from to
+```{r}
+ select(litters_df, group:gd18_weight)
+```
+
+remove sth
+```{r}
+ select(litters_df, -pups_survive)
+```
+
+remove sth from to
+```{r}
+ select(litters_df, -(group:gd18_weight))
+```
+
+select certain variables
+```{r}
+ select(litters_df, starts_with("gd"))
+
+ select(litters_df, contains("pups"))
+```
+
+ rename sth, keep everything else same
+ select sth, will show in order, keep everything else same
+```{r}
+ select(litters_df, GOURP = group)
+
+ rename(litters_df, GOURP = group)
+ 
+ select(litters_df, litter_number, gd0_weight, everything())
+```
+
+similar function "relocate"
+```{r}
+ relocate(litters_df, litter_number, go0_weight)
+```
+
+
+
+## 'filter'
+
+
+
+## 'mutate'
