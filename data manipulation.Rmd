@@ -130,12 +130,36 @@ learning assessment
  filter(pups_df, pd_walk < 11, sex ==2)
 ```
 
-
-
-
-
-
 ## 'mutate'
+
+for numeric and character variables
+```{r}
+ mutate(litters_df, wt_gain = gd18_weight - gd0_weight)
+
+ mutate(litters_df, sq_pups = pups_born_alive^2)
+ 
+ mutate(litters_df, group = str_to_lower(group) )
+```
+
+
+can manipulate multiple things
+```{r}
+ mutate(
+   litters_df,
+   wt_gain = gd18_weight - gd0_weight,
+   group = str_to_lower(group)
+   )
+```
+
+learning assessment
+
+```{r}
+ mutate(pups_df, pd_7 = pd_pivot - 7) 
+
+ mutate(pups_df, sum_all = pd_ears + pd_pivot + pd_eyes +pd_walk) 
+```
+
+
 
 
 
