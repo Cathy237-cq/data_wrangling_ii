@@ -174,9 +174,57 @@ can arrange multiple things at the same time
 arrange(litters_df, pups_born_alive, gd0_weight)
 ```
 
-## PIPING !!!!
+## PIPING !!!! 
+"|>" or "%>%" means 'and then'  
+"Cmd + Shift + M " shortcut
+do next step in next row
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv", na = c("NA","",".")) |>
+  janitor::clean_names() |>
+  select(-pups_born_alive) |>
+  filter(group == "Con7") |>
+  mutate(
+    wt_gain = 
+      gd18_weight - gd0_weight,
+    group = str_to_lower(group)
+  )
+```
 
 
+Pipe with the things isn't the first argument.
+tips: can put in different order, does not affect the next step, but not always guarantee.
+
+"_" the underscore means data is here to use
+```{r}
+read_csv("data/FAS_litters.csv", na = c("NA", "", ".")) |>
+  janitor::clean_names() |>
+  mutate(
+    wt_gain = 
+      gd18_weight - gd0_weight) |>
+  lm(wt_gain ~ pups_born_alive, data = _)
+```
+
+
+## Data export
+
+
+```{r}
+litters_df = 
+  read_csv("data/FAS_litters.csv", na = c("NA","",".")) |>
+  janitor::clean_names() |>
+  mutate(
+    wt_gain = 
+      gd18_weight - gd0_weight,
+    group = str_to_lower(group)
+  ) |> 
+  select(-pups_born_alive) |>
+  filter(group == "con7")
+
+write_csv(litters_df, "data/cleaned_fas_litters.csv")
+
+```
 
 
 
