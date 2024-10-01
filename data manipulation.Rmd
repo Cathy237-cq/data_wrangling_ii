@@ -160,8 +160,23 @@ learning assessment
 ```
 
 
-
-
-
-
 ## ‘arrange’
+
+use less frequently, cuz usually use once, and does not change data in the dataset
+```{r}
+ arrange(litters_df, gd0_weight)
+
+ arrange(litters_df, desc(gd0_weight))
+```
+
+can arrange multiple things at the same time
+```{r}
+arrange(litters_df, pups_born_alive, gd0_weight)
+```
+
+## PIPING !!!!
+
+
+
+
+
