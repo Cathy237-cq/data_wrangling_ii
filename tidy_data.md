@@ -70,3 +70,32 @@ Do one more example.
     ## 
     ## ℹ Use `spec()` to retrieve the full column specification for this data.
     ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+
+## Pivot wider
+
+Let’s make up an analysis result table.
+
+``` r
+ analysis_df = 
+  tibble(
+    group = c("treatment","treatment", "control", "control"),
+    time = c("pre", "post", "pre", "post"),
+    mean = c(4,10,4.2,5)
+  )
+```
+
+Pivot wider for human readability
+
+``` r
+ analysis_df |> 
+  pivot_wider(
+    names_from = time, #will become column names
+    values_from = mean
+  ) |> 
+  knitr::kable() #show as table when knit, looks more good
+```
+
+| group     | pre | post |
+|:----------|----:|-----:|
+| treatment | 4.0 |   10 |
+| control   | 4.2 |    5 |
