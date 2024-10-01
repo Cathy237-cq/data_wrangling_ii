@@ -99,3 +99,30 @@ Pivot wider for human readability
 |:----------|----:|-----:|
 | treatment | 4.0 |   10 |
 | control   | 4.2 |    5 |
+
+## Bind tables.
+
+``` r
+ fellowship_ring =
+   read_excel("Data/LotR_Words.xlsx", rang = "B3:D6") |> 
+   mutate(movie = "fellowships_ring")
+
+ two_towers =
+   read_excel("Data/LotR_Words.xlsx", rang = "F3:H6") |> 
+   mutate(movie = "two_towers")
+ 
+ return_king =
+   read_excel("Data/LotR_Words.xlsx", rang = "J3:L6") |> 
+   mutate(movie = "return_king")
+ 
+ lotr_df = 
+   bind_rows(fellowship_ring, two_towers, return_king) |> 
+   janitor::clean_names() |> 
+   pivot_longer(
+     cols = female:male,
+     names_to = "sex",
+     values_to = "words"
+   ) |> 
+   relocate(movie) |> 
+   mutate(race = str_to_lower(race))
+```
