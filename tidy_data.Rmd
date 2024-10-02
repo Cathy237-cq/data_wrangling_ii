@@ -126,6 +126,9 @@ Pivot wider for human readability
  
 ```
 
+
+## Joint table
+
 ```{r}
 
 ```
